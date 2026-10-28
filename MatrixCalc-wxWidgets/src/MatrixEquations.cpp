@@ -1,11 +1,11 @@
-#include "MatrixEquations.h"
+ï»¿#include "MatrixEquations.h"
 #include <vector>
 #include <string>
 #include <iostream>
 #include "Globals.h"
 
 Matrix MatrixEquations::addMatrix(Matrix& matrix1, Matrix& matrix2) {
-    if (matrix1.rows == matrix2.rows and matrix1.cols == matrix2.cols) {
+    if (matrix1.rows == matrix2.rows && matrix1.cols == matrix2.cols) {
         Matrix resultMatrix(matrix1.rows, matrix1.cols);
         for (int i = 0; i < matrix1.rows; i++) {
             for (int j = 0; j < matrix1.cols; j++) {
@@ -14,12 +14,12 @@ Matrix MatrixEquations::addMatrix(Matrix& matrix1, Matrix& matrix2) {
         }
         return resultMatrix;
     }
-    Matrix matrixReadFail("matrixReadFail",0,0);
+    Matrix matrixReadFail("matrixReadFail", 0, 0);
     return matrixReadFail;
 };
 
 Matrix MatrixEquations::subtractMatrix(Matrix& matrix1, Matrix& matrix2) {
-    if (matrix1.rows == matrix2.rows and matrix1.cols == matrix2.cols) {
+    if (matrix1.rows == matrix2.rows && matrix1.cols == matrix2.cols) {
         Matrix resultMatrix(matrix1.rows, matrix1.cols);
         for (int i = 0; i < matrix1.rows; i++) {
             for (int j = 0; j < matrix1.cols; j++) {
@@ -84,7 +84,10 @@ Matrix MatrixEquations::transposeMatrix(Matrix& matrix) {
 float MatrixEquations::detMatrix(Matrix& matrix) {
     if (matrix.cols != matrix.rows) {
         return 9999;
-    };
+    }
+    if (matrix.cols == 1) {
+        return matrix.data[0][0];
+    }
     if (matrix.cols == 2) {
         return matrix.data[0][0] * matrix.data[1][1] - matrix.data[0][1] * matrix.data[1][0];
     }
@@ -103,6 +106,9 @@ float MatrixEquations::detMatrix(Matrix& matrix) {
 };
 
 Matrix MatrixEquations::findSubMatrix(Matrix& matrix, int skipRow, int skipCol) {
+    if (matrix.rows <= 1 || matrix.cols <= 1) {
+        return Matrix(0, 0);
+    }
     Matrix subMatrix(matrix.rows - 1, matrix.cols - 1);
     int countRows = 0;
     for (int i = 0; i < matrix.rows; i++) {
@@ -119,19 +125,22 @@ Matrix MatrixEquations::findSubMatrix(Matrix& matrix, int skipRow, int skipCol) 
 }
 
 Matrix MatrixEquations::inverseMatrix(Matrix& matrix) {
-    if (matrix.cols == matrix.rows){
+    if (matrix.cols == matrix.rows) {
         Matrix resultMatrix(matrix.rows, matrix.cols);
         Matrix transposedMatrix = transposeMatrix(matrix);
         float det;
-        if (matrix.cols == 1){
+        if (matrix.cols == 1) {
             det = 1;
         }
         else {
             det = detMatrix(matrix);
         }
+        if (det == 0) {
+            Matrix matrixReadFail("matrixReadFail", 0, 0);
+            return matrixReadFail;
+        }
         for (int i = 0; i < matrix.rows; i++) {
-            for (int j = 0; j < matrix.cols; j++)
-            {
+            for (int j = 0; j < matrix.cols; j++) {
                 resultMatrix.data[i][j] = 1 / (det * transposedMatrix.data[i][j]);
             }
         }
@@ -145,7 +154,6 @@ int MatrixEquations::rankMatrix(Matrix& matrix) {
     float determinant;
     for (int colNum = 0; colNum < matrix.cols; colNum++) {
         for (int rowNum = 0; rowNum < matrix.rows; rowNum++) {
-            // Funkcja pomocnicza tworz¹ca pod macierz o stopieñ ni¿sz¹
             Matrix subMatrix = findSubMatrix(matrix, rowNum, colNum);
             determinant = detMatrix(subMatrix);
             if (determinant != 0) {
@@ -153,11 +161,12 @@ int MatrixEquations::rankMatrix(Matrix& matrix) {
             }
         }
     }
+    return 0;
 };
 
 Matrix MatrixEquations::createMatrix(std::string name, int rows, int cols) {
     Matrix matrix(name, rows, cols);
-    matrix.data.assign(rows, std::vector<float>(cols, 0.0));
+    matrix.data.assign(rows, std::vector<float>(cols, 0.0f));
     Matrices.push_back(matrix);
     return matrix;
 };
