@@ -1,25 +1,98 @@
-# MetodyProgramowania_31001
+# Metody Programowania — Projekty Zaliczeniowe
 
-Metody Programowania
+Repozytorium zawierające projekty programistyczne zrealizowane w języku **C++** w ramach przedmiotu **Metody Programowania** na **Politechnice Morskiej w Szczecinie**.
 
-Zagadnienia prowadzonych zajęć:
+---
 
-    Wykorzystanie rekurencji do rozwiązywania problemów algorytmicznych
-    Programowanie z nawrotami na przykładzie "problemu hetmanów"
-    Metoda dziel i zwyciężaj na przykładzie wyszukiwania przez podział binarny oraz algorytmu QuickSort
-    Praktyczna implementacja list jedno i dwukierunkowych oraz cyklicznych
-    Implementacja liniowych struktur danych: stosy i kolejki
-    Implementacja liniowych struktur danych: grafy
-    Implementacja i zastosowanie drzew dowolnego rzędu
-    Obiegi drzew i przykłady ich zastosowania
-    Programowanie zachłanne na przykładzie algorytmu Huffmana
-    Programowanie dynamiczne: problem plecakowy, optymalne mnożenie wielu macierzy
+## Przegląd projektów
 
-Podstawowe pojęcia | Załorzenia kodu:
+W repozytorium znajdują się dwa główne projekty oraz zbiór materiałów teoretycznych:
 
-    Klasy: W programowaniu obiektowym klasa jest szablonem lub modelem, który definiuje cechy i zachowania obiektów. Klasa zawiera definicje danych (często nazywane polami lub właściwościami) oraz funkcji (metodami), które operują na tych danych. Obiekty są instancjami klas.
-    Hermetyczność (encapsulation): Jest to jeden z filarów programowania obiektowego, który polega na ukrywaniu wewnętrznej implementacji obiektów i udostępnianiu jedynie niezbędnych interfejsów do interakcji z nimi. To znaczy, że pola klasy są zwykle prywatne, a dostęp do nich odbywa się za pomocą publicznych metod (getterów i setterów), co zapewnia kontrolę nad stanem obiektu i zapobiega bezpośredniemu manipulowaniu jego danymi.
-    Dziedziczenie: Jest to mechanizm programowania obiektowego, który umożliwia tworzenie nowych klas (klasy podrzędne lub pochodne) na podstawie istniejących klas (klasy bazowej lub nadrzędnej). Klasy dziedziczą właściwości i metody swoich klas nadrzędnych i mogą je rozszerzać lub modyfikować, co pozwala na ponowne wykorzystanie kodu oraz tworzenie hierarchii klas.
-    Polimorfizm: Oznacza to zdolność do przetwarzania obiektów różnych klas w taki sam sposób. W programowaniu obiektowym polimorfizm może być osiągnięty poprzez dziedziczenie i implementację metod o tych samych nazwach w różnych klasach. Dzięki temu, w zależności od rzeczywistego typu obiektu, wywołanie metody o tej samej nazwie może prowadzić do różnych zachowań.
-    Abstrakcja: Jest to proces wyodrębniania istotnych cech obiektów i ignorowania tych, które nie są istotne w danym kontekście. Abstrakcja pozwala na tworzenie modeli, które skupiają się na kluczowych aspektach i pomijają szczegóły implementacyjne. W programowaniu obiektowym abstrakcja często jest osiągana poprzez definiowanie interfejsów, klas abstrakcyjnych i metod abstrakcyjnych, które opisują zachowanie obiektów bez dostarczania konkretnej implementacji.
+| Projekt | Opis | Technologie | Ścieżka |
+| :--- | :--- | :--- | :--- |
+| **[MatrixCalc](MatrixCalc-wxWidgets/)** | Zaawansowany kalkulator macierzy z graficznym interfejsem użytkownika (GUI) oraz modułem konsolowym (CLI). Obsługuje dodawanie, odejmowanie, mnożenie, transpozycję, wyznacznik, odwracanie, rząd oraz import/eksport danych. | C++17, wxWidgets 3.2, CMake, wxGrid | [`MatrixCalc-wxWidgets/`](MatrixCalc-wxWidgets/) |
+| **[PM-OrganizationalTree](PM-OrganizationalTree/)** | Implementacja wielodrożnego drzewa hierarchicznego (N-arnego) odwzorowującego schemat organizacyjny Politechniki Morskiej w Szczecinie (Rektor $\rightarrow$ Wydziały $\rightarrow$ Katedry $\rightarrow$ Laboratoria). | C++17, STL (vector), Visual Studio / CMake | [`PM-OrganizationalTree/`](PM-OrganizationalTree/) |
+| **[Notatki i Teoria](docs/MetodyProgramowania_Notatki.md)** | Zestawienie zagadnień realizowanych na zajęciach (rekurencja, backtracking, drzewa, grafy, programowanie dynamiczne) oraz filary programowania obiektowego (OOP). | Markdown | [`docs/MetodyProgramowania_Notatki.md`](docs/MetodyProgramowania_Notatki.md) |
 
+---
+
+## Struktura Repozytorium
+
+```text
+MatrixCalc/
+├── .gitignore                          # Ignorowane pliki tymczasowe, binarne i VS (.vs, x64, *.pdb itp.)
+├── README.md                           # Główny opis repozytorium (ten plik)
+│
+├── docs/                               # Wspólne notatki i materiały teoretyczne
+│   └── MetodyProgramowania_Notatki.md  # Sylabus, zagadnienia z zajęć i definicje OOP
+│
+├── MatrixCalc-wxWidgets/               # Projekt 1: Kalkulator Macierzy (GUI + CLI)
+│   ├── CMakeLists.txt                  # Skrypt budowania CMake dla GUI i CLI
+│   ├── README.md                       # Szczegółowa dokumentacja kalkulatora macierzy
+│   ├── icons/                          # Zasoby graficzne (ikony paska narzędzi)
+│   ├── include/                        # Nagłówki (.h): App, MainFrame, Globals, MatrixEquations
+│   ├── src/                            # Źródła (.cpp): App, MainFrame, MatrixEquations
+│   ├── cli_legacy/                     # Wersja konsolowa projektu (ConsoleMenu.cpp)
+│   └── docs/                           # Założenia projektowe i materiały dydaktyczne wxWidgets
+│
+└── PM-OrganizationalTree/              # Projekt 2: Struktura Drzewiasta (Politechnika Morska)
+    ├── CMakeLists.txt                  # Skrypt budowania CMake
+    ├── HierarchicznaStrukturaDanych_Drzewa.sln     # Rozwiązanie Visual Studio 2022
+    ├── HierarchicznaStrukturaDanych_Drzewa.vcxproj # Konfiguracja projektu MSVC
+    ├── README.md                       # Szczegółowa dokumentacja struktury drzewiastej
+    ├── docs/                           # Prezentacja PowerPoint oraz założenia projektu
+    └── src/                            # Źródło C++ z implementacją hierarchii drzewa
+```
+
+---
+
+## Wymagania systemowe
+
+- **Kompilator C++**: Obsługa standardu **C++17** lub nowszego:
+  - MSVC v143 (Visual Studio 2022)
+  - GCC 10+
+  - Clang 11+
+- **Narzędzie do budowania**: [CMake](https://cmake.org/) (wersja $\ge 3.16$) lub Visual Studio 2022.
+- **Biblioteki zewnętrzne**:
+  - [wxWidgets 3.2+](https://www.wxwidgets.org/) – wymagane wyłącznie dla projektu `MatrixCalc-wxWidgets`. Projekt `PM-OrganizationalTree` oraz moduł `cli_legacy` korzystają wyłącznie ze standardowej biblioteki C++ (STL).
+
+---
+
+## Szybki Start
+
+### 1. Budowanie kalkulatora macierzy (`MatrixCalc-wxWidgets`)
+
+Projekt wspiera automatyczne pobieranie wxWidgets za pomocą modułu CMake **`FetchContent`** — nie musisz instalować żadnych bibliotek ręcznie:
+
+```bash
+cd MatrixCalc-wxWidgets
+mkdir build && cd build
+cmake ..
+cmake --build . --config Release
+```
+
+*Uwaga: Jeśli posiadasz już wxWidgets (np. zainstalowane przez `vcpkg`), CMake wykryje je automatycznie, co przyspieszy pierwsze budowanie.*
+
+Szczegółowe instrukcje konfiguracji i obsługi znajdują się w [`MatrixCalc-wxWidgets/README.md`](MatrixCalc-wxWidgets/README.md).
+
+### 2. Budowanie struktury drzewiastej (`PM-OrganizationalTree`)
+
+Projekt można skompilować za pomocą CMake, rozwiązania Visual Studio lub bezpośrednio z poziomu terminala:
+
+```bash
+cd PM-OrganizationalTree
+mkdir build && cd build
+cmake ..
+cmake --build .
+./PM_OrganizationalTree
+```
+
+Szczegółowe instrukcje konfiguracji i omówienie algorytmów znajdują się w [`PM-OrganizationalTree/README.md`](PM-OrganizationalTree/README.md).
+
+---
+
+## Uczelnia i Przedmiot
+
+- **Uczelnia**: Politechnika Morska w Szczecinie
+- **Kierunek**: Informatyka
+- **Przedmiot**: Metody Programowania
